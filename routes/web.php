@@ -1,0 +1,77 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('home.index');
+})->name('front');
+
+Route::get('/contact', function () {
+    return view('home.contact');
+});
+
+Route::get('/about', function () {
+    return view('home.about');
+});
+
+
+
+Route::get('/request-blood', function () {
+    return view('home.request-blood');
+});
+Route::get('/search-donor', 'FrontController@searchDonor');
+Route::post('/search-donor','FrontController@donorSearch')->name('search.nearby.donor');
+
+Route::get('/admin', function () {
+    return view('home.admin');
+});
+
+Route::post('/send/message','FrontController@sendMessage')->name('send.message');
+Route::get('/donor-registration','FrontController@donorRegister');
+Route::post('/register/donor','FrontController@registerDonor')->name('register.donor');
+
+Auth::routes();
+
+Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/inbox', 'HomeController@inbox')->name('inbox');
+    Route::get('/view/message/{id}', 'HomeController@viewMessage')->name('viewMessage');
+    Route::post('/delete-message/{id}', 'HomeController@destroyMessage')->name('delete.message');
+
+    Route::get('search/donor','DonorController@searchDonor')->name('admin.search.donor');
+    Route::post('search/donor/{text}','DonorController@search')->name('admin.donor.search');
+    Route::get('active/donors','DonorController@activeDonors')->name('admin.active.donor');
+    Route::get('inactive/donors','DonorController@inactiveDonors')->name('admin.inactive.donor');
+    Route::get('blood/requests','DonorController@bloodRequests')->name('admin.blood.requests');
+
+    Route::get('/view-area', 'HomeController@viewArea')->name('view.area');
+    Route::post('/add-area', 'HomeController@store')->name('store.area');
+    Route::post('/delete-area/{id}', 'HomeController@destroy')->name('delete.area');
+
+    Route::get('/country', 'CountryController@index')->name('country');
+    Route::get('view/country', 'CountryController@show')->name('view.country');
+    Route::post('/add-country', 'CountryController@store')->name('store.country');
+    Route::post('/delete-country/{id}', 'CountryController@destroy')->name('delete.country');
+
+    Route::get('/state', 'StateController@index')->name('state');
+    Route::get('view/state', 'StateController@show')->name('view.state');
+    Route::post('/add-state', 'StateController@store')->name('store.state');
+    Route::post('/delete-state/{id}', 'StateController@destroy')->name('delete.state');
+
+    Route::get('/city', 'CityController@index')->name('city');
+    Route::get('view/city', 'CityController@show')->name('view.city');
+    Route::post('/add-city', 'CityController@store')->name('store.city');
+    Route::post('/delete-city/{id}', 'CityController@destroy')->name('delete.city');
+});
