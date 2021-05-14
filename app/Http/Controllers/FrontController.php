@@ -11,6 +11,8 @@ use App\City;
 use App\Area;
 use DB;
 use App\BloodDonor;
+use App\BloodRequests;
+
 use Intervention\Image\Facades\Image as Image;
 
 class FrontController extends Controller
@@ -20,9 +22,46 @@ class FrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function requestBlood()
     {
-        //
+         $city = City::all();
+        return view('home.request-blood',['cities' => $city]);
+    }
+
+    public function sendRequest(Request $request){
+       $request_array = array();
+       $request_array['name'] = $request->name;
+       $request_array['gender'] = $request->gender;
+       $request_array['blood_group'] = $request->blood_group;
+       $request_array['blood_unit'] = $request->blood_unit;
+       $request_array['hospital'] = $request->hospital;
+       $request_array['city_id'] = $request->city;
+       $request_array['pincode'] = $request->pincode;
+       $request_array['doctor_name'] = $request->doctor_name;
+       $request_array['required_date'] = $request->required_date;
+       $request_array['contact_name'] = $request->contact_name;
+       $request_array['contact_address'] = $request->contact_address;
+       $request_array['email'] = $request->email;
+       $request_array['contact_no1'] = $request->contact_no1;
+       $request_array['contact_no2'] = $request->contact_no2;
+       $request_array['reason'] = $request->reason;
+
+       if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time(). '_donor.' .$extension;
+            $img = Image::make($request->file('image'))->save('uploads/requests/'.$filename, 60);
+        } else {
+            $filename = "noimage.jpg";
+        }
+
+
+       $request_array['image'] = $filename;
+
+       $status = BloodRequests::insert($request_array);
+        if($status){
+            return redirect()->route('front')->with('message','We have received your Blood Request. We will get back to you as soon as possible.');
+        }
     }
 
     /**
@@ -55,15 +94,11 @@ class FrontController extends Controller
         $donor_data['new_donor']= $request->new_donor;
 
         if($request->hasFile('image')) {
-            // dd("success");
             $file = $request->file('image');
-            // dd($file);
             $extension = $file->getClientOriginalExtension();
             $filename = time(). '_donor.' .$extension;
-            $img = Image::make($request->file('image'))->resize(1000,431)->save('uploads/donors/'.$filename, 60);
-            // dd($img);
+            $img = Image::make($request->file('image'))->save('uploads/donors/'.$filename, 60);
         } else {
-            // dd("fail");
             $filename = "noimage.jpg";
         }
 

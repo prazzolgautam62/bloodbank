@@ -25,17 +25,15 @@ Route::get('/about', function () {
     return view('home.about');
 });
 
-
-
-Route::get('/request-blood', function () {
-    return view('home.request-blood');
-});
-Route::get('/search-donor', 'FrontController@searchDonor');
-Route::post('/search-donor','FrontController@donorSearch')->name('search.nearby.donor');
-
 Route::get('/admin', function () {
     return view('home.admin');
 });
+
+Route::get('/request-blood', 'FrontController@requestBlood');
+Route::post('/request-blood','FrontController@sendRequest')->name('send.blood.request');
+
+Route::get('/search-donor', 'FrontController@searchDonor');
+Route::post('/search-donor','FrontController@donorSearch')->name('search.nearby.donor');
 
 Route::post('/send/message','FrontController@sendMessage')->name('send.message');
 Route::get('/donor-registration','FrontController@donorRegister');
@@ -52,9 +50,11 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
 
     Route::get('search/donor','DonorController@searchDonor')->name('admin.search.donor');
     Route::post('search/donor/{text}','DonorController@search')->name('admin.donor.search');
+
     Route::get('active/donors','DonorController@activeDonors')->name('admin.active.donor');
     Route::get('inactive/donors','DonorController@inactiveDonors')->name('admin.inactive.donor');
     Route::get('blood/requests','DonorController@bloodRequests')->name('admin.blood.requests');
+    Route::get('blood/request/details/{id}','DonorController@viewDetails')->name('admin.blood.details');
 
     Route::get('/view-area', 'HomeController@viewArea')->name('view.area');
     Route::post('/add-area', 'HomeController@store')->name('store.area');

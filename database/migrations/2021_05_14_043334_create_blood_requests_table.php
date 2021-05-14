@@ -16,6 +16,7 @@ class CreateBloodRequestsTable extends Migration
         Schema::create('blood_requests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('email');
             $table->string('gender');
             $table->string('blood_group');
             $table->integer('blood_unit');

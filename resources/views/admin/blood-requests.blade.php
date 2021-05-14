@@ -12,122 +12,58 @@
 			@include('admin.include.admin_sidenav')
 		</div>
 		<div class="col-sm-9" >
-			<h3 class='text-primary'><i class="fa fa-bed"></i> Patient Details </h3><hr>
-		<div class="row">
-		<div class='alert alert-success fade in' ><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success : </strong> Status Updated Success.</div>
 
-		<div class="col-md-4">
-					<div class="panel">
-					<div class="panel-body">
-					<img src="" class="image-rounded" height="300px" width="100%">
-			</div>
-			</div>
+			<h3 class="text-primary"><i class="fa fa-bed"></i>  Need Blood</h3><hr>
+<div class="col-md-6 col-md-offset-3">
 
+			<form role="form">
+				<div class="form-group text-primary">
+					<label>Search Text</label>
+					<input type="text" id="q" class="form-control">
+				</div>
+			</form>
 		</div>
-		<div class="col-md-8">
-		<table class="table table-striped">
-			<tr>
-				<th>Name</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Blood</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>UNIT</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Hospital</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>City</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Pincode</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Doctor Name</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Request Date</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Contact Person</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Address</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Email</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Contact-1</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Contact-2</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Status</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Completed Date</th>
-				<td></td>
-			</tr>
-		</table>
-		</div>
-		<div class="col-md-6">
-		<h3 class='text-primary'>Any Updation</h3>
-		<hr>
+		<div class='col-md-12'>
+			<div class='table-responsive' id="feedback">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>GENDER</th>
+                            <th>BLOOD GROUP</th>
+                            <th>UNIT</th>
+                            <th>HOSPITAL</th>
+                            <th>DOCTOR NAME</th>
+                            <th>REQUIRED DATE</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($requests as $data)
+                        <tr>
+                            <td>{{$data->id}}</td>
+                            <td>{{$data->name}}</td>
+                            <td>{{$data->gender}}</td>
+                            <td>{{$data->blood_group}}</td>
+                            <td>{{$data->blood_unit}}</td>
+                            <td>{{$data->hospital}}</td>
+                            <td>{{$data->doctor_name}}</td>
+                            <td>{{$data->required_date}}</td>
+                            <td>
+                                <a href="{{ route('admin.blood.details',$data->id)}}" class="btn btn-primary"> <i class="fa fa-eye"></i> </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+                </table>
 
-		<form method='post' action="">
-			<div class="form-group">
-				<label for="CDATE">Completed Date</label>
-				<input type="text" name="CDATE"  id="CDATE" class="form-control DATES">
 			</div>
-
-			<div class="form-group">
-				<label for="STATUS">Status</label>
-				<select name="STATUS" required  id="STATUS" class="form-control">
-					<option value="">Select Status</option>
-					<option value="0">Pending</option>
-					<option value="1">Not Completed</option>
-					<option value="2">Completed</option>
-				</select>
-			</div>
-			<button type='submit' class='btn btn-success ' name='submit'><i class='fa fa-edit'></i> Update Now</button>
-			<a href='admin_need_blood.php' class='btn btn-primary '>Back Page</a>
-		</form>
-		</div>
-
 		</div>
 		</div>
 	</div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script>
-          $("document").ready(function() {
-                    setTimeout(function() {
-                        $("div.alert").remove();
-                    }, 5000); // 5 secs
-
-                });
-    </script>
-
 @include('admin.include.admin_footer')
 
-	</body>
+</body>
 </html>

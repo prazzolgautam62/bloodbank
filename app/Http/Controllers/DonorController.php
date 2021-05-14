@@ -43,9 +43,13 @@ class DonorController extends Controller
     public function bloodRequests()
     {
        $blood = BloodRequests::all();
-       return view('admin.blood-requests',['blood'=>$blood]);
+       return view('admin.blood-requests',['requests'=>$blood]);
     }
 
+    public function viewDetails($id){
+       $data= BloodRequests::find($id);
+       return view('admin.bloodrequest-details',['request'=>$data]);
+    }
     /**
      * Store a newly created resource in storage.
      *
