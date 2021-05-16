@@ -96,14 +96,11 @@
 			</tr>
             @if($request->status == 2)
             <tr>
-                <td>Completed Date</td>
+                <th>Completed Date</th>
                 <td> {{$request->completed_date}}</td>
             </tr>
             @endif
-			<tr>
-				<th>Completed Date</th>
-				<td></td>
-			</tr>
+			
 		</table>
 		</div>
 		<div class="col-md-6">

@@ -145,10 +145,14 @@ class FrontController extends Controller
                          ) AS distance', [$latitude, $longitude, $latitude])
         ->havingRaw("distance < ?", [$radius])
         ->get()->first();
-
+        if($area){
         $donors = DB::table('blood_donors')->where([['area_id',$area->area_id],['blood_group',$blood_group]])->get();
-        return view('home.search-results',['donors'=>$donors]);
-
+        
+        }
+        else{
+            $donors=[];     
+        }
+         return view('home.search-results',['donors'=>$donors]);
     }
     /**
      * Store a newly created resource in storage.
