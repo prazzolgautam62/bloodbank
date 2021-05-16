@@ -16,10 +16,11 @@
 			<h3 class="text-primary"><i class="fa fa-bed"></i>  Need Blood</h3><hr>
 <div class="col-md-6 col-md-offset-3">
 
-			<form role="form">
+			<form action="{{ route('search.blood.requests') }}" method="post" role="form">
+                @csrf
 				<div class="form-group text-primary">
 					<label>Search Text</label>
-					<input type="text" id="q" class="form-control">
+					<input type="text" name="text" id="q" class="form-control">
 				</div>
 			</form>
 		</div>

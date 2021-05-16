@@ -34,6 +34,10 @@
 				<th>Blood</th>
 				<td>{{$request->blood_group}}</td>
 			</tr>
+            <tr>
+				<th>Reason</th>
+				<td>{{$request->reason}}</td>
+			</tr>
 			<tr>
 				<th>UNIT</th>
 				<td>{{$request->blood_unit}}</td>
@@ -80,8 +84,22 @@
 			</tr>
 			<tr>
 				<th>Status</th>
-				<td>{{$request->status}}</td>
+				<td>
+                    @if($request->status == 0)
+                   PENDING
+                   @elseif($request->status == 1)
+                   NOT COMPLETED
+                   @else
+                   COMPLETED
+                   @endif
+                </td>
 			</tr>
+            @if($request->status == 2)
+            <tr>
+                <td>Completed Date</td>
+                <td> {{$request->completed_date}}</td>
+            </tr>
+            @endif
 			<tr>
 				<th>Completed Date</th>
 				<td></td>
@@ -92,15 +110,16 @@
 		<h3 class='text-primary'>Any Updation</h3>
 		<hr>
 
-		<form method='post' action="">
+		<form method='post' action="{{ route('update.bloodrequest.status', $request->id)}}">
+            @csrf
 			<div class="form-group">
 				<label for="CDATE">Completed Date</label>
-				<input type="text" name="CDATE"  id="CDATE" class="form-control DATES">
+				<input type="text" name="completed_date"  id="CDATE" class="form-control DATES">
 			</div>
 
 			<div class="form-group">
 				<label for="STATUS">Status</label>
-				<select name="STATUS" required  id="STATUS" class="form-control">
+				<select name="status" required  id="STATUS" class="form-control">
 					<option value="">Select Status</option>
 					<option value="0">Pending</option>
 					<option value="1">Not Completed</option>

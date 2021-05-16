@@ -13,7 +13,7 @@
 			@include('admin.include.admin_sidenav')
 		</div>
 		<div class="col-sm-9" >
-			<h3 class="text-success"><i class="fa fa-users"></i> {{$status}} Donor Details </h3><hr>
+			<h3 class="text-success"><i class="fa fa-users"></i> {{$status}} </h3><hr>
 		<div class="row">
 
 		<div class='col-md-12'>
@@ -33,9 +33,7 @@
                         <th>
                             GENDER
                         </th>
-                        <th>
-                            DOB
-                        </th>
+
                         <th>
                            EMAIL
                         </th>
@@ -47,6 +45,9 @@
                         </th>
                         <th>
                             STATUS
+                        </th>
+                        <th>
+                            ACTIONS
                         </th>
                         </tr>
                     </thead>
@@ -65,9 +66,7 @@
                          <td>
                             {{$donor->gender}}
                          </td>
-                         <td>
-                            {{$donor->dob}}
-                         </td>
+
                          <td>
                             {{$donor->email}}
                          </td>
@@ -84,6 +83,9 @@
                              <span class="text-danger">InActive</span>
                              @endif
                          </td>
+                         <td>
+                            <a href="{{ route('admin.donor.details', $donor->donor_id) }}" class="btn btn-primary"> <i class="fa fa-eye"></i> </a>
+                        </td>
                          </tr>
                          @endforeach
                          @else

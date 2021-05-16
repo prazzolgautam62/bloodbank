@@ -49,12 +49,19 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     Route::post('/delete-message/{id}', 'HomeController@destroyMessage')->name('delete.message');
 
     Route::get('search/donor','DonorController@searchDonor')->name('admin.search.donor');
-    Route::post('search/donor/{text}','DonorController@search')->name('admin.donor.search');
+    Route::post('search/donor','DonorController@search')->name('admin.donor.search');
+    Route::get('blood/donors/details/{id}','DonorController@donorDetails')->name('admin.donor.details');
 
     Route::get('active/donors','DonorController@activeDonors')->name('admin.active.donor');
     Route::get('inactive/donors','DonorController@inactiveDonors')->name('admin.inactive.donor');
+    Route::any('update/last/donation/date/{id}','DonorController@updateDate')->name('update.last.donation.date');
+    Route::any('update/donors/status/{id}','DonorController@donorStatus')->name('update.donors.status');
+
     Route::get('blood/requests','DonorController@bloodRequests')->name('admin.blood.requests');
     Route::get('blood/request/details/{id}','DonorController@viewDetails')->name('admin.blood.details');
+    Route::post('blood/request/status/update/{id}','DonorController@updateStatus')->name('update.bloodrequest.status');
+
+    Route::post('search/blood/request','DonorController@searchBloodRequest')->name('search.blood.requests');
 
     Route::get('/view-area', 'HomeController@viewArea')->name('view.area');
     Route::post('/add-area', 'HomeController@store')->name('store.area');

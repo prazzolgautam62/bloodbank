@@ -34,8 +34,8 @@ class CreateBloodRequestsTable extends Migration
             $table->string('contact_no2');
             $table->text('reason');
             $table->string('image');
-            $table->boolean('status')->default(1);
-
+            $table->integer('status')->default(1);
+            $table->date('completed_date')->nullable();
             $table->timestamps();
         });
     }

@@ -16,10 +16,11 @@
 		<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 
-			<form role="form">
+			<form role="form" action="{{ route('admin.donor.search')}}" method="post">
+                @csrf
 				<div class="form-group text-primary">
 					<label>Search Text</label>
-					<input type="text" id="q" class="form-control">
+					<input type="text" name="text" id="q" class="form-control">
 				</div>
 			</form>
 		</div>
