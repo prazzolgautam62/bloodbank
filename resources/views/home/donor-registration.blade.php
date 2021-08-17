@@ -175,7 +175,7 @@
 							<input type="text"  name="last_donation_date"  id="LAST_D_DATE" placeholder="YYYY/MM/DD" class="form-control input-sm DATES">
 						</div>
 					</div>
-						  <hr>
+						  <hr><hr>
 						  <div class="form-group" id="new">
 							<label class="control-label text-primary"  for="NEW_DONOR">New Donor</label>
 								<select name="new_donor"  id="NEW_DONOR"  class="form-control input-sm">
