@@ -90,9 +90,10 @@
                          @endforeach
                          @else
                          <tr>
-                             <td colspan="8">There are no inactive donors at this time. Please Try Again later.</td>
+                             <td colspan="8">There are no donors at this time. Please Try Again later.</td>
                          </tr>
                          @endif
+                         
                     </tbody>
                 </table>
 

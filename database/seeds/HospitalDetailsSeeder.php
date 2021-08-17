@@ -19,6 +19,8 @@ class HospitalDetailsSeeder extends Seeder
         INSERT INTO `hospital_details`(name, address_1, address_2, longitude, latitude) VALUES(' Birgunj Health Care Hospital               ', 'Birgunj      ','Parsa                                 ', '27.04443418548712' , '84.90028765992068');
         INSERT INTO `hospital_details`(name, address_1, address_2, longitude, latitude) VALUES(' Chitwan Medical College Teaching Hospital  ', 'Bharatpur    ','Chitwan District                      ', '27.68573759820287' , '84.43054883072979');
         INSERT INTO `hospital_details`(name, address_1, address_2, longitude, latitude) VALUES('Advanced Poly Clinic(Pokhara)',             'Pani Pokhari    ',' Kathmandu                            ','28.222193468141537', '84.16159043460125');
+        
+
         ";
         DB::unprepared($sql);
     }

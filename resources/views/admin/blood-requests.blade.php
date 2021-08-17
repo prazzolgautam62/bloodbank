@@ -20,7 +20,7 @@
                 @csrf
 				<div class="form-group text-primary">
 					<label>Search Text</label>
-					<input type="text" name="text" id="q" class="form-control">
+					<input type="name" name="text" id="q" class="form-control">
 				</div>
 			</form>
 		</div>

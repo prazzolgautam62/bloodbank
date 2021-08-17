@@ -44,7 +44,7 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label text-primary" for="FATHER_NAME">Father Name</label>
-							<input type="text" placeholder="Father Name" id="fathers_name" name="fathers_name" required class="form-control input-sm">
+							<input type="text" placeholder="Father Name" id="fathers_name" name="fathers_name"  class="form-control input-sm">
 						</div>
 
 						<div class="form-group">
@@ -88,7 +88,7 @@
 						</div>
 						 <div class="form-group">
 								<label class="control-label text-primary" for="EMAIL" >Email ID</label>
-                                <input type="email"  required name="email" id="EMAIL" class="form-control" placeholder="Email Address">
+                                <input type="email"   name="email" id="EMAIL" class="form-control" placeholder="Email Address">
                           </div>
 
 						  <div class="form-group">
@@ -136,7 +136,7 @@
 
 						   					  <div class="form-group">
 								<label class="control-label text-primary" for="ADDRESS">Address</label>
-                                <textarea required name="address" id="ADDRESS" rows="5" style="resize:none;"class="form-control" placeholder="Full Address"></textarea>
+                                <textarea  name="address" id="ADDRESS" rows="5" style="resize:none;"class="form-control" placeholder="Full Address"></textarea>
                           </div>
 
 						  <div class="form-group">
@@ -150,7 +150,7 @@
                           </div>
 						   <div class="form-group">
 								<label class="control-label text-primary" for="CONTACT_2" >Contact-2</label>
-                                <input type="text" required name="contact_2" id="CONTACT_2" class="form-control" placeholder="Contact No-2">
+                                <input type="text"  name="contact_2" id="CONTACT_2" class="form-control" placeholder="Contact No-2">
                           </div>
 						  <hr>
 						   <div class="form-group">
@@ -172,7 +172,7 @@
 						 </div>
 						<div class="form-group">
 							<label class="control-label text-primary"  for="LAST_D_DATE">Last Blood Donoted Date</label>
-							<input type="text"  name="last_donation_date" value="0000/00/00"  id="LAST_D_DATE" placeholder="YYYY/MM/DD" class="form-control input-sm DATES">
+							<input type="text"  name="last_donation_date"  id="LAST_D_DATE" placeholder="YYYY/MM/DD" class="form-control input-sm DATES">
 						</div>
 					</div>
 						  <hr>

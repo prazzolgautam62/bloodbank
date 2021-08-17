@@ -146,7 +146,9 @@ class FrontController extends Controller
         ->havingRaw("distance < ?", [$radius])
         ->get()->first();
         if($area){
-        $donors = DB::table('blood_donors')->where([['area_id',$area->area_id],['blood_group',$blood_group]])->get();
+        $donors = DB::table('blood_donors')->where([['area_id',$area->area_id],['blood_group',$blood_group]])
+        ->where('status',1)
+        ->get();
         
         }
         else{

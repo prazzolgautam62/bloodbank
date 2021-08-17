@@ -31,6 +31,7 @@ class DonorController extends Controller
                      ->join('cities as ct','ct.city_id','=', 'bd.city_id')
                      ->where('bd.donor_id',$id)
                      ->get()->first();
+                 
         return view('admin.donor-details',['donor'=>$object]);
     }
 
@@ -59,6 +60,8 @@ class DonorController extends Controller
         $object = BloodDonor::query()
                         ->where('name', 'LIKE', "%{$searchTerm}%")
                         ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('blood_group', 'LIKE', "%{$searchTerm}%")
+                        ->where('status',1)
                         ->get();
         $status = "Search Results of Donors";
         return view('admin.donor',['donors'=>$object,'status'=>$status]);
@@ -100,6 +103,7 @@ class DonorController extends Controller
         $object = BloodRequests::query()
                         ->where('name', 'LIKE', "%{$searchTerm}%")
                         ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('blood_group', 'LIKE', "%{$searchTerm}%")
                         ->get();
         return view('admin.blood-requests',['requests'=>$object]);
     }
