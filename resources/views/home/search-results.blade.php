@@ -94,7 +94,7 @@
                                     {{$donor->last_donation_date}}
                                  </td>
                                  <td>
-                                     VOLUNTARY DONOR
+                                     {{$donor->voluntary}}
                                  </td>
                                  <td>
                                      @if ($donor->status == 1)
