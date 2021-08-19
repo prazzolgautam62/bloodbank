@@ -83,7 +83,8 @@
                              <span class="text-danger">InActive</span>
                              @endif
                          </td>
-                         <td>
+                         <td style="width:100px;">
+                         <a href="{{ route('admin.donor.edit', $donor->donor_id) }}" class="btn btn-success"> <i class="fa fa-edit"></i> </a>
                             <a href="{{ route('admin.donor.details', $donor->donor_id) }}" class="btn btn-primary"> <i class="fa fa-eye"></i> </a>
                         </td>
                          </tr>

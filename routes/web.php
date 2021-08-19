@@ -51,6 +51,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     Route::get('search/donor','DonorController@searchDonor')->name('admin.search.donor');
     Route::post('search/donor','DonorController@search')->name('admin.donor.search');
     Route::get('blood/donors/details/{id}','DonorController@donorDetails')->name('admin.donor.details');
+    Route::get('blood/donors/edit/{id}','DonorController@editDonor')->name('admin.donor.edit');
+    Route::any('blood/donors/update/{id}','DonorController@updateDonorDetails')->name('admin.donor.update');
 
     Route::get('active/donors','DonorController@activeDonors')->name('admin.active.donor');
     Route::get('inactive/donors','DonorController@inactiveDonors')->name('admin.inactive.donor');

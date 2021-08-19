@@ -135,7 +135,7 @@
                 @csrf
                 <div class="form-group">
                     <label class="control-label text-primary" for="ldata">Last Donate Date</label>
-                    <input type="text" name="last_donation_date" placeholder="YYYY/MM/DD"  id="ldata" name="ldata"  class="form-control input-sm DATES">
+                    <input type="text" value="{{$donor->last_donation_date}}" name="last_donation_date" placeholder="YYYY/MM/DD"  id="ldata" name="ldata"  class="form-control input-sm DATES">
                 </div>
 
                 <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Changes</button>

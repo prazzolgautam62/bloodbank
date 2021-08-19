@@ -52,7 +52,7 @@ class CreateBloodDonorsTable extends Migration
             $table->foreign('country_id')
                 ->references('country_id')->on('countries')
                 ->onDelete('cascade');
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

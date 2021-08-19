@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BloodDonor;
+use App\Country;
+use App\State;
+use App\City;
+use Carbon\Carbon;
+use App\Area;
 use App\BloodRequests;
 use DB;
 
@@ -77,6 +82,26 @@ class DonorController extends Controller
         return view('admin.donor',['donors'=>$donor,'status'=>$status]);
     }
 
+    public function editDonor($id){
+        $object = DB::table('blood_donors as bd')
+                     ->select('bd.*','s.state_name','c.country_name','a.area_name','ct.city_name')
+                     ->join('states as s','s.state_id','=', 'bd.state_id')
+                     ->join('countries as c','c.country_id','=', 'bd.country_id')
+                     ->join('areas as a','a.area_id','=', 'bd.area_id')
+                     ->join('cities as ct','ct.city_id','=', 'bd.city_id')
+                     ->where('bd.donor_id',$id)
+                     ->get()->first();
+        $country = Country::all();
+        $selected_country = Country::where('country_id',$object->country_id)->first();
+        $state = State::all();
+        $selected_state = State::where('state_id',$object->state_id)->first();
+        $city = City::all();
+        $selected_city = City::where('city_id',$object->city_id)->first();
+        $area = Area::all();
+        $selected_area = Area::where('area_id',$object->area_id)->first();
+        return view('admin.edit-donor',['object'=>$object,'countries'=>$country,'selected_country'=>$selected_country,'states'=>$state,'selected_state'=>$selected_state,'cities'=>$city,'selected_city'=>$selected_city,'areas'=>$area,'selected_area'=>$selected_area]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -121,6 +146,36 @@ class DonorController extends Controller
       $object->update();
 
       return redirect()->back()->with('message','Blood Request Status Updated Successfully');
+    }
+
+    public function updateDonorDetails(Request $request, $id){
+
+        $donor_data = array();
+        $donor_data['name']= $request->name;
+        $donor_data['fathers_name']= $request->fathers_name;
+        $donor_data['gender']= $request->gender;
+        $donor_data['dob']= Carbon::parse($request->dob);
+        $donor_data['blood_group']= $request->blood_group;
+        $donor_data['body_weight']= $request->body_weight;
+        $donor_data['email']= $request->email;
+        $donor_data['country_id']= $request->country;
+        $donor_data['state_id']= $request->state;
+        $donor_data['city_id']= $request->city;
+        $donor_data['area_id']= $request->area;
+        $donor_data['address']= $request->address;
+        $donor_data['pincode']= $request->pincode;
+        $donor_data['contact_1']= $request->contact_1;
+        $donor_data['contact_2']= $request->contact_2;
+        $donor_data['last_donation_date']= Carbon::parse($request->last_donation_date);
+        $donor_data['status']= $request->status;
+
+        $status = DB::table('blood_donors')->where('donor_id',$id)->update($donor_data);
+        if($status){
+            return redirect()->route('admin.donor.search')->with(['message'=> 'Donor DAta Successfully Updated!!']);
+        }
+        else{
+            return redirect()->route('admin.donor.search')->with(['error'=> 'Error While Updating Donor DAta !!']);
+        }
     }
 
     /**
