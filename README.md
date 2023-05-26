@@ -28,4 +28,8 @@ Run the database migrations (Set the database connection in .env before migratin
 ```bash
 php artisan migrate
 ```
+Start the server
+```bash
+php artisan serve
+```
 You can now access the server at (http://127.0.0.1:8000/).
